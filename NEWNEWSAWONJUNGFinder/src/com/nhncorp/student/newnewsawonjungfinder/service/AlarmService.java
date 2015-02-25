@@ -45,6 +45,7 @@ public class AlarmService extends Service implements LocationListener {
 
 	private int setAlarm = 0; // false
 	private int setdistance = 0; // false
+	private int setAlarmGps = 0;
 
 	// new algorithm variable
 	ArrayList<Double> storedArr = new ArrayList<Double>();
@@ -81,10 +82,13 @@ public class AlarmService extends Service implements LocationListener {
 		public void handleMessage(Message msg) {
 			mTimerHandler.sendEmptyMessageDelayed(0, 1000);
 			Constants.NOTIFYCOUNT++;
-			if (Constants.NOTIFYCOUNT > 4) {
-				if (notificationManager != null) {
+			if (Constants.NOTIFYCOUNT > 6) {
+				if (notificationManager != null && setAlarmGps == 0) {
+					setAlarmGps = 1;
+					notificationManager.cancel(2);
 					loadGps();
 					getgps();
+
 				}
 
 			}
@@ -114,10 +118,7 @@ public class AlarmService extends Service implements LocationListener {
 	public void onDestroy() {
 		System.out.println("=================stop service====================");
 		super.onDestroy();
-		if (notificationManager != null) {
-			loadGps();
-			getgps();
-		}
+		Constants.DISTANCE = 40;
 		centralManager.stopScanning();
 	}
 
@@ -135,6 +136,7 @@ public class AlarmService extends Service implements LocationListener {
 					runOnUiThread(new Runnable() {
 						public void run() {
 							Constants.NOTIFYCOUNT = 0;
+							setAlarmGps = 0;
 
 							// //////////////////////////////////////////////////////////////////////
 							// 거리 수신값 최적화
@@ -669,11 +671,11 @@ public class AlarmService extends Service implements LocationListener {
 
 	private void setNotification(double distance) {
 
-		if (Constants.DISTANCE < 10 && Constants.DISTANCE > 3) {
+		if (Constants.DISTANCE < 9 && Constants.DISTANCE > 3) {
 			setAlarm = 1;
 		}
 
-		if (Constants.DISTANCE > 15 && setAlarm == 1) {
+		if (Constants.DISTANCE > 15 && setAlarm == 1 && Constants.DISTANCE <40) {
 			setDistanceNotify();
 		}
 

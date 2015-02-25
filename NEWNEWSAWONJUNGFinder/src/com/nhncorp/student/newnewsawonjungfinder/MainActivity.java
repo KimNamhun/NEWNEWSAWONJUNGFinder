@@ -72,11 +72,25 @@ public class MainActivity extends Activity {
 				devOnOffBtn.setImageResource(R.drawable.main_service_on);
 				showSettingsAlert();
 				setService(1); // start
+				myThread = new Thread(new Runnable() {
+					public void run() {
+						while (runThread) {
+							try {
+								handler.sendMessage(handler.obtainMessage());
+								Thread.sleep(100);
+							} catch (Throwable t) {
+							}
+						}
+					}
+				});
 				myThread.start();
 			} else if (dbGetSet.getDeviceState().equals("1")) {
 				dbGetSet.setDeviceState("0");
 				devOnOffBtn.setImageResource(R.drawable.main_service_off);
+				Constants.NOTIFYCOUNT = 7;
+				Constants.DISTANCE = 40;
 				setService(0); // stop
+
 			}
 		} else if (sel == 1) { // 아무일도 하지 않음
 			if (dbGetSet.getDeviceState().equals("0")) {
@@ -177,8 +191,6 @@ public class MainActivity extends Activity {
 		// 거리는 1m단위로 제공
 		if (Constants.DISTANCE <= 30) {
 			distanceData.setText(Constants.DISTANCE + "M");
-		} else {
-			distanceData.setText("...");
 		}
 
 		// 2m 이하일 때 메세지 표시, 진동 발생
@@ -189,13 +201,16 @@ public class MainActivity extends Activity {
 				vibrator.vibrate(200);
 				countVibrator++;
 			}
+		} else if (Constants.NOTIFYCOUNT > 3 || Constants.DISTANCE > 30) {
+			distanceMessage.setText("weak signal");
+			distanceData.setText("...");
 		} else {
 			distanceMessage.setText(" ");
 			countVibrator = 0;
 		}
 
 		// 신호가 없는 경우
-		if (Constants.NOTIFYCOUNT > 4) {
+		if (Constants.NOTIFYCOUNT > 6) {
 			Constants.DISTANCE = 40;
 			distanceMessage.setText("no signal");
 		}
