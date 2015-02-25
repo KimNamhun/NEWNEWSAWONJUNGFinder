@@ -58,6 +58,7 @@ public class MainActivity extends Activity {
 	}
 
 	private void init() {
+		Constants.DISTANCE = 40;
 		getView();
 		dbGetSet = new DbGetSet(MainActivity.this);
 		deviceConfirm(1); // nothing
@@ -202,7 +203,7 @@ public class MainActivity extends Activity {
 				vibrator.vibrate(200);
 				countVibrator++;
 			}
-			
+
 		} else {
 			distanceMessage.setText(" ");
 			countVibrator = 0;
