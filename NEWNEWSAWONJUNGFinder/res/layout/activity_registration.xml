@@ -1,0 +1,30 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/cardWaitingText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="사원증을 여기에 접근시켜 주세요.."
+        android:textSize="20sp" >
+    </TextView>
+
+    <LinearLayout
+        android:id="@+id/cardNamingLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible" >
+
+        <Button
+            android:id="@+id/cardNamingBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="확인" >
+        </Button>
+    </LinearLayout>
+
+</LinearLayout>
