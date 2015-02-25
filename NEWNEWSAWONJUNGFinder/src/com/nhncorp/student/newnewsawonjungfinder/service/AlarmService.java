@@ -82,7 +82,7 @@ public class AlarmService extends Service implements LocationListener {
 		public void handleMessage(Message msg) {
 			mTimerHandler.sendEmptyMessageDelayed(0, 1000);
 			Constants.NOTIFYCOUNT++;
-			if (Constants.NOTIFYCOUNT > 6) {
+			if (Constants.NOTIFYCOUNT > 5) {
 				if (notificationManager != null && setAlarmGps == 0) {
 					setAlarmGps = 1;
 					notificationManager.cancel(2);
@@ -118,7 +118,6 @@ public class AlarmService extends Service implements LocationListener {
 	public void onDestroy() {
 		System.out.println("=================stop service====================");
 		super.onDestroy();
-		Constants.DISTANCE = 40;
 		centralManager.stopScanning();
 	}
 
@@ -675,11 +674,11 @@ public class AlarmService extends Service implements LocationListener {
 			setAlarm = 1;
 		}
 
-		if (Constants.DISTANCE > 15 && setAlarm == 1 && Constants.DISTANCE <40) {
+		if (Constants.DISTANCE > 15 && setAlarm == 1 && Constants.DISTANCE < 40) {
 			setDistanceNotify();
 		}
 
-		if (setdistance == 1 && Constants.DISTANCE < 10
+		if (setdistance == 1 && Constants.DISTANCE < 9
 				&& Constants.DISTANCE > 3) {
 			if (notificationManager != null) {
 				notificationManager.cancel(2);
@@ -727,10 +726,10 @@ public class AlarmService extends Service implements LocationListener {
 				intent, 0);
 		notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 		notification3 = new Notification.Builder(getApplicationContext())
-				.setContentTitle("사원증이 멀어졌습니다").setContentText("사원증을 두고 갔습니다")
+				.setContentTitle("사원증이 멀어졌습니다").setContentText("사원증을 두고 갔나요?")
 				.setSmallIcon(R.drawable.main_alarm_distance_icon)
 				.setTicker("사원증을 두고 가지 않으셨나요?").setAutoCancel(true)
-				.setVibrate(new long[] { 1000, 1000 })
+				.setVibrate(new long[] { 700, 700 })
 				.setContentIntent(pendingIntent).build();
 		System.out.println("push===============================alarm");
 		notificationManager.notify(2, notification3);
@@ -812,7 +811,7 @@ public class AlarmService extends Service implements LocationListener {
 			System.out.println("GPS+++++++++++++++++++++++++++++++++++++++++");
 			locationManager.requestLocationUpdates(provider, 1000, 5, listener);
 			try {
-				Thread.sleep(5000);
+				Thread.sleep(4000);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
