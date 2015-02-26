@@ -728,7 +728,7 @@ public class AlarmService extends Service implements LocationListener {
 		notification3 = new Notification.Builder(getApplicationContext())
 				.setContentTitle("사원증이 멀어졌습니다").setContentText("사원증을 두고 갔나요?")
 				.setSmallIcon(R.drawable.main_alarm_distance_icon)
-				.setTicker("사원증을 두고 가지 않으셨나요?").setAutoCancel(true)
+				.setTicker("사원증을 가져가셨나요?").setAutoCancel(true)
 				.setVibrate(new long[] { 700, 700 })
 				.setContentIntent(pendingIntent).build();
 		System.out.println("push===============================alarm");

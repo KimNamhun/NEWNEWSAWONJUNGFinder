@@ -2,25 +2,36 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="3dp" >
+    android:background="#465568"
+    android:orientation="vertical" >
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal" >
-
-        <ImageButton
-            android:id="@+id/alarmButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="#00000000"
-            android:src="@drawable/main_service_off" />
+        android:layout_height="42dp"
+        android:background="#3f4c5d"
+        android:orientation="horizontal"
+        android:padding="3dp" >
 
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:layout_weight="0.18"
+            android:orientation="vertical" >
+
+            <ImageButton
+                android:id="@+id/alarmButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="#00000000"
+                android:paddingTop="4dp"
+                android:src="@drawable/main_service_off" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="0.33"
             android:gravity="center"
             android:orientation="vertical" >
 
@@ -36,7 +47,7 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_weight="0.16"
             android:gravity="end"
             android:orientation="vertical" >
 
@@ -46,6 +57,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="right"
                 android:background="#00000000"
+                android:paddingRight="3dp"
+                android:paddingTop="3dp"
                 android:src="@drawable/main_setting_btn" />
         </LinearLayout>
     </LinearLayout>
@@ -53,30 +66,30 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
         android:gravity="center" >
 
-        <TextView
+        <ImageView
             android:id="@+id/distanceData"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="..."
-            android:textSize="50dp" />
-    </RelativeLayout>
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="162dp"
+            android:src="@drawable/m41" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="vertical" >
+        <ImageView
+            android:id="@+id/distanceImg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="162dp"
+            android:src="@drawable/distance31" />
 
-        <TextView
+        <ImageView
             android:id="@+id/stateMessage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text=" no signal"
-            android:textSize="30sp" />
-    </LinearLayout>
+            android:layout_alignParentBottom="true"
+            android:src="@drawable/message3" />
+    </RelativeLayout>
 
 </LinearLayout>

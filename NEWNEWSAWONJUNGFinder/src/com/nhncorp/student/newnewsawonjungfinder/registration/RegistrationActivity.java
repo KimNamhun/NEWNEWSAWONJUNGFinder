@@ -8,12 +8,11 @@ import android.os.Vibrator;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
-import android.widget.Button;
-import android.widget.LinearLayout;
-import android.widget.TextView;
+import android.widget.ImageButton;
 
 import com.nhncorp.student.newnewsawonjungfinder.MainActivity;
 import com.nhncorp.student.newnewsawonjungfinder.R;
+import com.nhncorp.student.newnewsawonjungfinder.R.drawable;
 import com.nhncorp.student.newnewsawonjungfinder.database.DbGetSet;
 import com.wizturn.sdk.central.Central;
 import com.wizturn.sdk.central.CentralManager;
@@ -23,11 +22,8 @@ import com.wizturn.sdk.peripheral.PeripheralScanListener;
 public class RegistrationActivity extends Activity {
 
 	private CentralManager centralManager;
-	private TextView cardWaitingText;
-	private LinearLayout cardNamingLayout;
-	private Button cardNamingBtn;
+	private ImageButton cardNamingBtn;
 
-	private boolean loadingState = false;
 	private boolean registrationState = false;
 
 	private Peripheral peripheralValue;
@@ -71,17 +67,18 @@ public class RegistrationActivity extends Activity {
 				dbGetSet.setRegistration(peripheralValue.getBDAddress());
 				Intent intent = new Intent(RegistrationActivity.this,
 						MainActivity.class);
-				startActivity(intent);
-				RegistrationActivity.this.finish();
+				if (registrationState == true) {
+					registrationState = false;
+					startActivity(intent);
+					RegistrationActivity.this.finish();
+				}
 			}
 		});
 
 	}
 
 	private void getView() {
-		cardWaitingText = (TextView) findViewById(R.id.cardWaitingText);
-		cardNamingLayout = (LinearLayout) findViewById(R.id.cardNamingLayout);
-		cardNamingBtn = (Button) findViewById(R.id.cardNamingBtn);
+		cardNamingBtn = (ImageButton) findViewById(R.id.cardNamingBtn);
 	}
 
 	private void setCentralManager(Context context) {
@@ -109,16 +106,8 @@ public class RegistrationActivity extends Activity {
 	}
 
 	private void setView(Peripheral peripheral) {
-		if (loadingState == false) {
-			cardWaitingText.setText("사원증을 여기에 접근시켜 주세요... ");
-			loadingState = true;
-		} else {
-			cardWaitingText.setText("사원증을 여기에 접근시켜 주세요...");
-			loadingState = false;
-		}
 		if (peripheral.getDistance() < 0.04 && registrationState == false) {
-			cardWaitingText.setTextSize(60);
-			cardWaitingText.setText("삑 ");
+			cardNamingBtn.setImageResource(drawable.registration2);
 			Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
 			vibrator.vibrate(500);
 			peripheralValue = peripheral;
@@ -126,17 +115,13 @@ public class RegistrationActivity extends Activity {
 
 		} else if (registrationState == true) {
 			centralManager.stopScanning();
-			registrationState = false;
 			try {
 				Thread.sleep(2000);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			cardWaitingText.setTextSize(20);
-			cardWaitingText.setText("인식되었습니다.\n확인을 누르면 사원증이 등록됩니다. ");
-			cardNamingLayout.setVisibility(View.VISIBLE);
-
+			cardNamingBtn.setImageResource(drawable.registration_btn);
 		}
 
 	}

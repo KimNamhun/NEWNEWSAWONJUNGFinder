@@ -14,8 +14,9 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
 import android.widget.ImageButton;
-import android.widget.TextView;
+import android.widget.ImageView;
 
+import com.nhncorp.student.newnewsawonjungfinder.R.drawable;
 import com.nhncorp.student.newnewsawonjungfinder.constants.Constants;
 import com.nhncorp.student.newnewsawonjungfinder.database.DbGetSet;
 import com.nhncorp.student.newnewsawonjungfinder.service.AlarmService;
@@ -24,8 +25,9 @@ public class MainActivity extends Activity {
 
 	private ImageButton devOnOffBtn;
 
-	private TextView distanceData;
-	private TextView distanceMessage;
+	private ImageView distanceData;
+	private ImageView distanceImg;
+	private ImageView distanceMessage;
 
 	private Thread myThread = null;
 	private boolean runThread = true;
@@ -119,8 +121,9 @@ public class MainActivity extends Activity {
 
 	private void getView() {
 		devOnOffBtn = (ImageButton) findViewById(R.id.alarmButton);
-		distanceData = (TextView) findViewById(R.id.distanceData);
-		distanceMessage = (TextView) findViewById(R.id.stateMessage);
+		distanceData = (ImageView) findViewById(R.id.distanceData);
+		distanceMessage = (ImageView) findViewById(R.id.stateMessage);
+		distanceImg = (ImageView) findViewById(R.id.distanceImg);
 
 	}
 
@@ -190,14 +193,51 @@ public class MainActivity extends Activity {
 
 		// 거리는 1m단위로 제공
 		if (Constants.DISTANCE <= 30) {
-			distanceData.setText(Constants.DISTANCE + "M");
+			String sDistance = "m" + Constants.DISTANCE;
+			int distanceId = this.getResources().getIdentifier(sDistance,
+					"drawable", this.getPackageName());
+			distanceData.setImageResource(distanceId);
+			if (Constants.DISTANCE == 0) {
+				distanceImg.setImageResource(drawable.distance0);
+			} else if (Constants.DISTANCE == 1) {
+				distanceImg.setImageResource(drawable.distance1);
+			} else if (Constants.DISTANCE == 2) {
+				distanceImg.setImageResource(drawable.distance2);
+			} else if (Constants.DISTANCE == 3) {
+				distanceImg.setImageResource(drawable.distance3);
+			} else if (Constants.DISTANCE == 4) {
+				distanceImg.setImageResource(drawable.distance4);
+			} else if (Constants.DISTANCE == 5) {
+				distanceImg.setImageResource(drawable.distance5);
+			} else if (Constants.DISTANCE == 6) {
+				distanceImg.setImageResource(drawable.distance6);
+			} else if (Constants.DISTANCE == 7) {
+				distanceImg.setImageResource(drawable.distance7);
+			} else if (Constants.DISTANCE == 8 || Constants.DISTANCE == 9) {
+				distanceImg.setImageResource(drawable.distance9);
+			} else if (Constants.DISTANCE > 9 && Constants.DISTANCE <= 12) {
+				distanceImg.setImageResource(drawable.distance12);
+			} else if (Constants.DISTANCE > 12 && Constants.DISTANCE <= 15) {
+				distanceImg.setImageResource(drawable.distance15);
+			} else if (Constants.DISTANCE > 15 && Constants.DISTANCE <= 18) {
+				distanceImg.setImageResource(drawable.distance18);
+			} else if (Constants.DISTANCE > 18 && Constants.DISTANCE <= 21) {
+				distanceImg.setImageResource(drawable.distance21);
+			} else if (Constants.DISTANCE > 21 && Constants.DISTANCE <= 24) {
+				distanceImg.setImageResource(drawable.distance24);
+			} else if (Constants.DISTANCE > 24 && Constants.DISTANCE <= 27) {
+				distanceImg.setImageResource(drawable.distance27);
+			} else {
+				distanceImg.setImageResource(drawable.distance30);
+			}
 		} else {
-			distanceData.setText("30M↑");
+			distanceData.setImageResource(drawable.m31);
+			distanceImg.setImageResource(drawable.distance31);
 		}
 
 		// 2m 이하일 때 메세지 표시, 진동 발생
 		if (Constants.DISTANCE <= 2) {
-			distanceMessage.setText("근접!");
+			distanceMessage.setImageResource(drawable.message1);
 			Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
 			if (countVibrator == 0) {
 				vibrator.vibrate(200);
@@ -205,14 +245,15 @@ public class MainActivity extends Activity {
 			}
 
 		} else {
-			distanceMessage.setText(" ");
+			distanceMessage.setImageResource(drawable.message2);
 			countVibrator = 0;
 		}
 
 		// 신호가 없는 경우
 		if (Constants.NOTIFYCOUNT > 5) {
-			distanceData.setText("...");
-			distanceMessage.setText("no signal");
+			distanceData.setImageResource(drawable.m41);
+			distanceImg.setImageResource(drawable.distance31);
+			distanceMessage.setImageResource(drawable.message3);
 		}
 	}
 
