@@ -40,6 +40,10 @@
             android:name=".registration.RegistrationActivity"
             android:label="@string/app_name" >
         </activity>
+        <activity android:name=".setting.SettingActivity" >
+        </activity>
+        <activity android:name=".map.MapActivity" >
+        </activity>
         <!-- service setting -->
         <service android:name=".service.AlarmService" >
             <intent-filter>

@@ -19,11 +19,14 @@ import android.widget.ImageView;
 import com.nhncorp.student.newnewsawonjungfinder.R.drawable;
 import com.nhncorp.student.newnewsawonjungfinder.constants.Constants;
 import com.nhncorp.student.newnewsawonjungfinder.database.DbGetSet;
+import com.nhncorp.student.newnewsawonjungfinder.function.manageActivity;
 import com.nhncorp.student.newnewsawonjungfinder.service.AlarmService;
+import com.nhncorp.student.newnewsawonjungfinder.setting.SettingActivity;
 
 public class MainActivity extends Activity {
 
 	private ImageButton devOnOffBtn;
+	private ImageButton settingButton;
 
 	private ImageView distanceData;
 	private ImageView distanceImg;
@@ -116,11 +119,23 @@ public class MainActivity extends Activity {
 
 			}
 		});
+		settingButton.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(MainActivity.this,
+						SettingActivity.class);
+				startActivity(intent);
+				manageActivity.setMainActivity(MainActivity.this);
+
+			}
+		});
 
 	}
 
 	private void getView() {
 		devOnOffBtn = (ImageButton) findViewById(R.id.alarmButton);
+		settingButton = (ImageButton) findViewById(R.id.settingButton);
 		distanceData = (ImageView) findViewById(R.id.distanceData);
 		distanceMessage = (ImageView) findViewById(R.id.stateMessage);
 		distanceImg = (ImageView) findViewById(R.id.distanceImg);

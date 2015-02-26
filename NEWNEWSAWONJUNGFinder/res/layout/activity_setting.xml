@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#465568"
+    android:orientation="vertical" >
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/setting_title" />
+
+
+<ImageButton
+        android:id="@+id/reRegistrationButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#00000000"
+        android:src="@drawable/reregistrationbtn" 
+        android:paddingTop="20dp"/>
+
+<ImageButton
+        android:id="@+id/lastLogButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#00000000"
+        android:src="@drawable/lastlogbtn" 
+        android:paddingTop="15dp"/>
+
+<ImageButton
+        android:id="@+id/helpButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#00000000"
+        android:src="@drawable/helpbtn" 
+        android:paddingTop="15dp"/>
+
+   <!--  <ImageButton
+        android:id="@+id/logListButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#00000000"
+        android:src="@drawable/loglistbtn" 
+        android:paddingTop="20dp"/> -->
+</LinearLayout>

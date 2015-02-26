@@ -16,7 +16,7 @@ public class Database {
 				+ LONGITUDE + " text not null, " + LATITUDE
 				+ " text not null );";
 		public static final String _INSERT = "insert into " + _TABLENAME
-				+ " VALUES " + "(1, '0', '0', '127.123067', '37.388126');";
+				+ " VALUES " + "(1, '0', '0', '0', '0');";
 
 		// 로그 리스트
 		public static final String ID2 = "id";

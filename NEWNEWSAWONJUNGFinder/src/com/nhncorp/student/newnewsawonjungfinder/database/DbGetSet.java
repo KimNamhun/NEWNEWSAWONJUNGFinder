@@ -112,8 +112,8 @@ public class DbGetSet extends Activity {
 
 	public void setRegistration(String getBDaddress) {
 		dbOpen();
-		mDbOpenHelper.updateColumn(1, getBDaddress, "0", "127.123067",
-				"37.388126");
+		mDbOpenHelper.updateColumn(1, getBDaddress, "0", "0",
+				"0");
 		dbClose();
 	}
 
