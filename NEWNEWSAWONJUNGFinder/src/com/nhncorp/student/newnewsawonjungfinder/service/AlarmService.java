@@ -810,12 +810,7 @@ public class AlarmService extends Service implements LocationListener {
 		if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
 			System.out.println("GPS+++++++++++++++++++++++++++++++++++++++++");
 			locationManager.requestLocationUpdates(provider, 1000, 5, listener);
-			try {
-				Thread.sleep(4000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			
 		}
 
 	}

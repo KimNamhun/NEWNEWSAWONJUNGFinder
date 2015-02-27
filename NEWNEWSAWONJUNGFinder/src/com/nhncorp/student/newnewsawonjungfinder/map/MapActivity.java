@@ -141,7 +141,7 @@ public class MapActivity extends NMapActivity implements
 
 			mMapController.setMapCenter(
 					new NGeoPoint(Double.parseDouble(dbGetSet.getLongitude()),
-							Double.parseDouble(dbGetSet.getLatitude())), 7);
+							Double.parseDouble(dbGetSet.getLatitude())), 11);
 			poiData.addPOIitem(Double.parseDouble(dbGetSet.getLongitude()),
 					Double.parseDouble(dbGetSet.getLatitude()),
 					"이 구역에서 없어졌을 가능성이 높아요!", markerId, 0);
